@@ -5,7 +5,7 @@
 ![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)
 ![FHE](https://img.shields.io/badge/powered%20by-Zama%20FHEVM-green.svg)
 
-**Prove you're 18+ without revealing when you were born.** Your birth year is encrypted in browser, verified on chain via FHE, and only you can decrypt the result. Zero knowledge. Zero exposure.
+**Prove you're 18+ without revealing when you were born.** Your birth year is encrypted in browser, verified on chain via FHE, and only you can decrypt the result. 
 
 ## ⚡ Flow
 
