@@ -1,0 +1,35 @@
+# 敏感信息
+eggone.txt
+contracts/.env
+frontend/.env
+frontend/.env.local
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+artifacts/
+cache/
+typechain-types/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
