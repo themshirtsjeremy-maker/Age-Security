@@ -29,9 +29,7 @@ export function StatusBar() {
   };
 
   const openEtherscan = () => {
-    if (CONTRACT_ADDRESS !== "0x0000000000000000000000000000000000000000") {
-      window.open(`${ETHERSCAN_URL}/address/${CONTRACT_ADDRESS}`, "_blank");
-    }
+    window.open(`${ETHERSCAN_URL}/address/${CONTRACT_ADDRESS}`, "_blank");
   };
 
   return (
@@ -67,19 +65,17 @@ export function StatusBar() {
       </div>
 
       {/* Contract Address */}
-      {CONTRACT_ADDRESS !== "0x0000000000000000000000000000000000000000" && (
-        <button
-          onClick={openEtherscan}
-          className="flex items-center gap-2 px-3 py-2 border border-border bg-card/80 backdrop-blur-sm hover:border-accent transition-colors group"
-        >
-          <Shield className="w-3 h-3 text-muted-foreground group-hover:text-accent" />
-          <span className="text-muted-foreground">CONTRACT</span>
-          <span className="text-foreground group-hover:text-accent">
-            {shortenAddress(CONTRACT_ADDRESS)}
-          </span>
-          <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-accent" />
-        </button>
-      )}
+      <button
+        onClick={openEtherscan}
+        className="flex items-center gap-2 px-3 py-2 border border-border bg-card/80 backdrop-blur-sm hover:border-accent transition-colors group"
+      >
+        <Shield className="w-3 h-3 text-muted-foreground group-hover:text-accent" />
+        <span className="text-muted-foreground">CONTRACT</span>
+        <span className="text-foreground group-hover:text-accent">
+          {shortenAddress(CONTRACT_ADDRESS)}
+        </span>
+        <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-accent" />
+      </button>
 
       {/* Wallet Address */}
       {isConnected && address && (
@@ -112,4 +108,3 @@ export function StatusBar() {
     </div>
   );
 }
-
