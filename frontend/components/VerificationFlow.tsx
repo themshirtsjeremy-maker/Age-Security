@@ -15,7 +15,6 @@ export function VerificationFlow() {
   const { address, isConnected } = useAccount();
   const { data: walletClient } = useWalletClient();
   const [hasExistingSubmission, setHasExistingSubmission] = useState(false);
-  const [submissionCount, setSubmissionCount] = useState(0);
   
   const {
     step,
@@ -46,13 +45,6 @@ export function VerificationFlow() {
     args: address ? [address] : undefined,
   });
 
-  // Get submission count
-  const { data: userSubmissionCount, refetch: refetchCount } = useReadContract({
-    address: CONTRACT_ADDRESS,
-    abi: CONTRACT_ABI,
-    functionName: "getUserSubmissionCount",
-    args: address ? [address] : undefined,
-  });
 
   // Initialize FHEVM on mount
   useEffect(() => {
@@ -76,11 +68,6 @@ export function VerificationFlow() {
     }
   }, [hasSubmitted]);
 
-  useEffect(() => {
-    if (userSubmissionCount !== undefined) {
-      setSubmissionCount(Number(userSubmissionCount));
-    }
-  }, [userSubmissionCount]);
 
   // Handle wallet connection/disconnection
   useEffect(() => {
@@ -90,7 +77,6 @@ export function VerificationFlow() {
       reset();
       setStep("idle");
       setHasExistingSubmission(false);
-      setSubmissionCount(0);
     }
   }, [isConnected]);
 
@@ -115,7 +101,6 @@ export function VerificationFlow() {
     if (isConfirmed && step === "confirming") {
       // Refetch submission status
       refetchSubmission();
-      refetchCount();
       handleDecryption();
     }
   }, [isConfirmed]);
@@ -249,16 +234,9 @@ export function VerificationFlow() {
             <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">
               {hasExistingSubmission ? "VERIFIED" : "READY"}
             </h2>
-            <p className="text-muted-foreground tracking-wide mb-4">
+            <p className="text-muted-foreground tracking-wide mb-8">
               YOUR DATA STAYS ENCRYPTED
             </p>
-            
-            {/* Show submission count if user has verified before */}
-            {hasExistingSubmission && submissionCount > 0 && (
-              <p className="text-muted-foreground text-sm mb-8">
-                Verified {submissionCount} time{submissionCount > 1 ? "s" : ""}
-              </p>
-            )}
             
             {error && (
               <p className="text-red-500 text-sm mb-8 max-w-md">{error}</p>
